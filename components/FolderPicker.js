@@ -21,7 +21,7 @@ export default function FolderPicker({
   folders, current, onPick, onClose, onCreateFolder,
 }) {
   const ref = useRef(null);
-  const [mode, setMode] = useState('list'); // 'list' | 'create'
+  const [mode, setMode] = useState('list');
   const [newName, setNewName] = useState('');
   const [newIcon, setNewIcon] = useState('📁');
 
@@ -49,11 +49,11 @@ export default function FolderPicker({
   };
 
   return (
-    <div className="fixed inset-0 z-[2000] flex items-center justify-center bg-black/70 backdrop-blur-md p-4">
+    <div className="fixed inset-0 z-[2000] flex items-center justify-center bg-black/50 p-4">
       <div
         ref={ref}
-        className="glass-strong rounded-2xl w-full max-w-md shadow-2xl modal-in overflow-hidden"
-        style={{ boxShadow: '0 30px 80px rgba(0,0,0,0.7)' }}
+        className="rounded-2xl w-full max-w-md shadow-2xl modal-in overflow-hidden"
+        style={{ background: 'var(--bg-panel)' }}
       >
         {/* Header */}
         <div
@@ -72,7 +72,7 @@ export default function FolderPicker({
                 {mode === 'list' ? 'Pindah ke Folder' : 'Folder Baru'}
               </h3>
               <p className="text-xs mt-0.5" style={{ color: 'var(--text-muted)' }}>
-                {mode === 'list' ? 'Pilih tujuan atau bikin folder baru' : 'Ketik nama & pilih icon'}
+                {mode === 'list' ? 'Pilih folder tujuan' : 'Ketik nama & pilih icon'}
               </p>
             </div>
           </div>
@@ -84,10 +84,8 @@ export default function FolderPicker({
           </button>
         </div>
 
-        {/* BODY */}
         {mode === 'list' ? (
           <div className="p-4 max-h-[60vh] overflow-y-auto">
-            {/* Tombol bikin folder baru — PALING ATAS */}
             <button
               onClick={() => setMode('create')}
               className="w-full flex items-center gap-3 p-3 rounded-xl mb-3 transition btn-accent"
@@ -102,35 +100,35 @@ export default function FolderPicker({
               <span className="text-white text-sm">→</span>
             </button>
 
-            {/* Divider */}
             <div className="flex items-center gap-2 my-3">
               <div className="flex-1 h-px" style={{ background: 'var(--border)' }} />
-              <span className="text-[10px] font-bold tracking-widest" style={{ color: 'var(--text-dim)' }}>
+              <span
+                className="text-[10px] font-bold tracking-widest"
+                style={{ color: 'var(--text-dim)' }}
+              >
                 ATAU PILIH FOLDER
               </span>
               <div className="flex-1 h-px" style={{ background: 'var(--border)' }} />
             </div>
 
-            {/* Tanpa folder */}
             <button
               onClick={() => { onPick(null); onClose(); }}
               className={`w-full flex items-center gap-3 p-3 rounded-xl mb-2 transition text-left border ${
-                current === null
-                  ? 'btn-accent'
-                  : 'hover:bg-[var(--bg-hover)]'
+                current === null ? 'btn-accent' : 'hover:bg-[var(--bg-hover)]'
               }`}
               style={current !== null ? { borderColor: 'var(--border)' } : {}}
             >
               <div
                 className="w-10 h-10 rounded-lg flex items-center justify-center text-xl"
-                style={{
-                  background: current === null ? 'rgba(255,255,255,0.2)' : 'var(--bg-main)',
-                }}
+                style={{ background: current === null ? 'rgba(255,255,255,0.2)' : 'var(--bg-panel-dark)' }}
               >
                 🚫
               </div>
               <div className="flex-1">
-                <div className="font-semibold text-sm" style={{ color: current === null ? '#fff' : 'var(--text)' }}>
+                <div
+                  className="font-semibold text-sm"
+                  style={{ color: current === null ? '#fff' : 'var(--text)' }}
+                >
                   Tanpa Folder
                 </div>
                 <div
@@ -143,7 +141,6 @@ export default function FolderPicker({
               {current === null && <span className="text-xs text-white">✓</span>}
             </button>
 
-            {/* List folder */}
             {folders.map((f) => {
               const isActive = current === f.id;
               return (
@@ -157,12 +154,15 @@ export default function FolderPicker({
                 >
                   <div
                     className="w-10 h-10 rounded-lg flex items-center justify-center text-xl"
-                    style={{ background: isActive ? 'rgba(255,255,255,0.2)' : 'var(--bg-main)' }}
+                    style={{ background: isActive ? 'rgba(255,255,255,0.2)' : 'var(--bg-panel-dark)' }}
                   >
                     {f.icon || '📁'}
                   </div>
                   <div className="flex-1">
-                    <div className="font-semibold text-sm" style={{ color: isActive ? '#fff' : 'var(--text)' }}>
+                    <div
+                      className="font-semibold text-sm"
+                      style={{ color: isActive ? '#fff' : 'var(--text)' }}
+                    >
                       {f.name}
                     </div>
                     <div
@@ -178,10 +178,11 @@ export default function FolderPicker({
             })}
           </div>
         ) : (
-          /* MODE CREATE */
           <div className="p-5">
-            {/* Preview */}
-            <div className="flex items-center gap-3 mb-4 p-3 rounded-xl" style={{ background: 'var(--bg-main)' }}>
+            <div
+              className="flex items-center gap-3 mb-4 p-3 rounded-xl"
+              style={{ background: 'var(--bg-panel-dark)' }}
+            >
               <div
                 className="w-12 h-12 rounded-lg flex items-center justify-center text-2xl"
                 style={{ background: 'var(--bg-hover)' }}
@@ -196,28 +197,30 @@ export default function FolderPicker({
               </div>
             </div>
 
-            {/* Input */}
-            <label className="block text-xs font-bold mb-2 tracking-wider" style={{ color: 'var(--text-muted)' }}>
+            <label
+              className="block text-xs font-bold mb-2 tracking-wider"
+              style={{ color: 'var(--text-muted)' }}
+            >
               NAMA FOLDER
             </label>
             <input
               autoFocus
               value={newName}
               onChange={(e) => setNewName(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') handleCreate();
-              }}
+              onKeyDown={(e) => { if (e.key === 'Enter') handleCreate(); }}
               placeholder="Misal: Projek Penting"
               className="w-full px-4 py-3 rounded-xl text-sm outline-none mb-4"
               style={{
-                background: 'var(--bg-main)',
+                background: 'var(--bg-panel-dark)',
                 color: 'var(--text)',
                 border: '1px solid var(--border)',
               }}
             />
 
-            {/* Icon picker dengan LABEL */}
-            <label className="block text-xs font-bold mb-2 tracking-wider" style={{ color: 'var(--text-muted)' }}>
+            <label
+              className="block text-xs font-bold mb-2 tracking-wider"
+              style={{ color: 'var(--text-muted)' }}
+            >
               PILIH ICON
             </label>
             <div className="grid grid-cols-4 gap-2 mb-4">
@@ -241,7 +244,6 @@ export default function FolderPicker({
               ))}
             </div>
 
-            {/* Actions */}
             <div className="flex gap-2">
               <button
                 onClick={() => setMode('list')}
@@ -252,7 +254,7 @@ export default function FolderPicker({
               <button
                 onClick={handleCreate}
                 disabled={!newName.trim()}
-                className="btn-accent flex-1 py-3 rounded-xl text-sm font-semibold disabled:opacity-40 disabled:cursor-not-allowed"
+                className="btn-accent flex-1 py-3 rounded-xl text-sm font-semibold disabled:opacity-40"
               >
                 Buat Folder
               </button>

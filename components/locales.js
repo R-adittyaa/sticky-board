@@ -1,0 +1,216 @@
+export const translations = {
+  id: {
+    // Toolbar
+    appName: 'Pinboard',
+    search: 'Cari...',
+    searchPlaceholder: '🔍 Cari note...',
+    undo: 'Undo (Ctrl+Z)',
+    export: 'Export JSON',
+    import: 'Import JSON',
+    settings: 'Pengaturan',
+    addNote: 'Note baru (N)',
+    note: 'Note',
+    sidebar: 'Menu',
+    language: 'Bahasa',
+
+    // Settings page
+    settingsTitle: 'Pengaturan',
+    settingsSubtitle: 'Sesuaikan papan lu sesuka hati',
+    back: 'Kembali',
+    boardTheme: 'Tema Papan',
+    boardThemeDesc: 'Pilih tampilan latar belakang papan',
+    noteSize: 'Ukuran Note',
+    noteSizeDesc: 'Sesuaikan besar kecilnya sticky notes',
+    languageSection: 'Bahasa',
+    languageDesc: 'Pilih bahasa tampilan aplikasi',
+    statistics: 'Statistik',
+    statsDesc: 'Data papan lu saat ini',
+    totalNotes: 'Total Notes',
+    totalFolders: 'Total Folder',
+    pinnedNotes: 'Note Di-Pin',
+    dangerZone: 'Zona Bahaya',
+    dangerDesc: 'Aksi di bawah ini permanen dan gak bisa di-undo',
+    resetData: 'Reset Semua Data',
+    resetConfirm1: 'Yakin mau reset SEMUA data? Notes & folder bakal hilang permanen!',
+    resetConfirm2: 'Beneran nih? Gak bisa di-undo lho!',
+    resetSuccess: 'Semua data direset',
+
+    // Board themes
+    cork: 'Cork Board',
+    cream: 'Cream',
+    dark: 'Dark Wood',
+
+    // Note sizes
+    small: 'Kecil',
+    medium: 'Sedang',
+    large: 'Besar',
+
+    // Languages
+    indonesian: 'Indonesia',
+    english: 'English',
+
+    // Sidebar
+    folders: 'FOLDER',
+    allNotes: 'Semua Notes',
+    newFolder: 'Folder Baru',
+    pickIcon: 'PILIH ICON',
+    folderName: 'Nama folder...',
+    create: 'Buat',
+    cancel: 'Batal',
+    deleteFolderConfirm: 'Hapus folder ini?',
+
+    // Toast / Messages
+    noteCreated: 'Note baru dibuat',
+    noteDeleted: 'Note dihapus',
+    noteRestored: 'Note dikembalikan',
+    nothingToUndo: 'Gak ada yang bisa di-undo',
+    folderCreated: 'Folder dibuat',
+    folderDeleted: 'Folder dihapus',
+    noteMoved: 'Note dipindah ke',
+    notesExported: 'Notes ke-export',
+    notesImported: 'notes ke-import',
+    emptyBoard: 'Papan ini kosong',
+    searchNoResult: 'Gak ada note yang cocok',
+    pressN: 'Tekan',
+    orClick: 'atau klik',
+    emptyNote: 'Klik untuk menulis...',
+    openNote: 'Buka →',
+    escape: 'ESC',
+    escapeHint: 'buat keluar',
+    close: 'Tutup',
+
+    // Full page
+    writeSomething: 'Tulis sesuatu di sini...',
+    pinned: 'Disematkan',
+    pinToggle: 'Sematkan',
+    pinUnpin: 'Lepas semat',
+    paperColor: 'Warna kertas',
+    pinColor: 'Warna pin',
+    deleteNote: 'Hapus',
+    deleteNoteConfirm: 'Hapus note ini?',
+
+    // Folder picker
+    moveTo: 'Pindah ke Folder',
+    moveToDesc: 'Pilih folder tujuan',
+    createNew: 'Bikin Folder Baru',
+    createNewDesc: 'Ketik nama & pilih icon',
+    orPickFolder: 'ATAU PILIH FOLDER',
+    noFolder: 'Tanpa Folder',
+    noFolderDesc: 'Lepas dari folder manapun',
+    moveHere: 'Pindah ke folder ini',
+    preview: 'Preview',
+    folderNameLabel: 'NAMA FOLDER',
+    pickIconLabel: 'PILIH ICON',
+    folderNamePlaceholder: 'Misal: Projek Penting',
+  },
+
+  en: {
+    // Toolbar
+    appName: 'Pinboard',
+    search: 'Search...',
+    searchPlaceholder: '🔍 Search notes...',
+    undo: 'Undo (Ctrl+Z)',
+    export: 'Export JSON',
+    import: 'Import JSON',
+    settings: 'Settings',
+    addNote: 'New note (N)',
+    note: 'Note',
+    sidebar: 'Menu',
+    language: 'Language',
+
+    // Settings page
+    settingsTitle: 'Settings',
+    settingsSubtitle: 'Customize your board however you like',
+    back: 'Back',
+    boardTheme: 'Board Theme',
+    boardThemeDesc: 'Pick the board background look',
+    noteSize: 'Note Size',
+    noteSizeDesc: 'Adjust sticky notes size',
+    languageSection: 'Language',
+    languageDesc: 'Choose the app display language',
+    statistics: 'Statistics',
+    statsDesc: 'Your board data right now',
+    totalNotes: 'Total Notes',
+    totalFolders: 'Total Folders',
+    pinnedNotes: 'Pinned Notes',
+    dangerZone: 'Danger Zone',
+    dangerDesc: 'Actions below are permanent and cannot be undone',
+    resetData: 'Reset All Data',
+    resetConfirm1: 'Sure you want to reset ALL data? Notes & folders will be permanently deleted!',
+    resetConfirm2: 'Really? This cannot be undone!',
+    resetSuccess: 'All data has been reset',
+
+    // Board themes
+    cork: 'Cork Board',
+    cream: 'Cream',
+    dark: 'Dark Wood',
+
+    // Note sizes
+    small: 'Small',
+    medium: 'Medium',
+    large: 'Large',
+
+    // Languages
+    indonesian: 'Indonesian',
+    english: 'English',
+
+    // Sidebar
+    folders: 'FOLDERS',
+    allNotes: 'All Notes',
+    newFolder: 'New Folder',
+    pickIcon: 'PICK ICON',
+    folderName: 'Folder name...',
+    create: 'Create',
+    cancel: 'Cancel',
+    deleteFolderConfirm: 'Delete this folder?',
+
+    // Toast / Messages
+    noteCreated: 'New note created',
+    noteDeleted: 'Note deleted',
+    noteRestored: 'Note restored',
+    nothingToUndo: 'Nothing to undo',
+    folderCreated: 'Folder created',
+    folderDeleted: 'Folder deleted',
+    noteMoved: 'Note moved to',
+    notesExported: 'Notes exported',
+    notesImported: 'notes imported',
+    emptyBoard: 'This board is empty',
+    searchNoResult: 'No notes match',
+    pressN: 'Press',
+    orClick: 'or click',
+    emptyNote: 'Click to write...',
+    openNote: 'Open →',
+    escape: 'ESC',
+    escapeHint: 'to exit',
+    close: 'Close',
+
+    // Full page
+    writeSomething: 'Write something here...',
+    pinned: 'Pinned',
+    pinToggle: 'Pin',
+    pinUnpin: 'Unpin',
+    paperColor: 'Paper color',
+    pinColor: 'Pin color',
+    deleteNote: 'Delete',
+    deleteNoteConfirm: 'Delete this note?',
+
+    // Folder picker
+    moveTo: 'Move to Folder',
+    moveToDesc: 'Pick destination folder',
+    createNew: 'Create New Folder',
+    createNewDesc: 'Type name & pick icon',
+    orPickFolder: 'OR PICK A FOLDER',
+    noFolder: 'No Folder',
+    noFolderDesc: 'Remove from any folder',
+    moveHere: 'Move to this folder',
+    preview: 'Preview',
+    folderNameLabel: 'FOLDER NAME',
+    pickIconLabel: 'PICK ICON',
+    folderNamePlaceholder: 'e.g. Important Project',
+  },
+};
+
+export const LANGUAGES = [
+  { id: 'id', name: 'Indonesia', flag: '🇮🇩' },
+  { id: 'en', name: 'English', flag: '🇬🇧' },
+];

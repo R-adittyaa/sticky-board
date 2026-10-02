@@ -1,16 +1,18 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
+import { translations } from './locales';
 
 export default function Toolbar({
   search, setSearch, onAdd,
   onExport, onImport, onUndo, canUndo,
-  theme, toggleTheme,
-  grid, toggleGrid,
-  noteCount,
-  onToggleSidebar,
+  noteCount, onToggleSidebar,
+  onOpenSettings,
+  language,
 }) {
+  const t = translations[language];
   const fileRef = useRef(null);
+  const [showMobileSearch, setShowMobileSearch] = useState(false);
 
   const handleImportClick = () => fileRef.current?.click();
 
@@ -21,7 +23,7 @@ export default function Toolbar({
     reader.onload = (ev) => {
       try {
         const data = JSON.parse(ev.target.result);
-        if (Array.isArray(data)) onImport(data);
+        if (Array.isArray(data) || data.notes) onImport(data);
         else alert('Format file salah bro!');
       } catch {
         alert('File JSON gak valid!');
@@ -33,96 +35,117 @@ export default function Toolbar({
 
   return (
     <header
-      className="glass-strong flex flex-wrap gap-2 md:gap-3 px-3 md:px-6 py-3 items-center z-50 relative"
-      style={{ height: '64px' }}
+      className="flex gap-2 px-3 md:px-5 items-center border-b z-50 relative shrink-0"
+      style={{
+        height: '60px',
+        background: 'var(--bg-panel)',
+        borderColor: 'var(--border)',
+      }}
     >
       <button
         onClick={onToggleSidebar}
-        className="btn-ghost rounded-lg w-9 h-9 flex items-center justify-center"
-        title="Toggle sidebar"
+        className="btn-ghost rounded-lg w-9 h-9 flex items-center justify-center shrink-0"
+        data-tooltip={t.sidebar}
       >
         ☰
       </button>
 
-      <h1 className="text-base md:text-xl font-bold mr-auto flex items-center gap-2 glow-text">
-        🎨 Sticky Board
+      <div className="flex items-center gap-2 mr-auto min-w-0">
+        <h1
+          className="text-base md:text-lg font-bold truncate"
+          style={{ color: 'var(--text)' }}
+        >
+          📌 <span className="hidden sm:inline">{t.appName}</span>
+        </h1>
         <span
-          className="text-xs font-normal px-2 py-0.5 rounded-full"
-          style={{
-            background: 'var(--bg-hover)',
-            color: 'var(--text-muted)',
-          }}
+          className="text-xs font-semibold px-2 py-0.5 rounded-full shrink-0"
+          style={{ background: 'var(--bg-hover)', color: 'var(--text-muted)' }}
         >
           {noteCount}
         </span>
-      </h1>
+      </div>
 
+      {/* Search — desktop */}
       <input
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        placeholder="🔍 Cari..."
-        className="px-3 py-2 rounded-lg outline-none w-32 md:w-60 text-sm transition"
+        placeholder={t.searchPlaceholder}
+        className="hidden md:block px-3 py-2 rounded-lg outline-none w-56 text-sm transition"
         style={{
-          background: 'var(--bg-main)',
+          background: 'var(--bg-panel-dark)',
           border: '1px solid var(--border)',
           color: 'var(--text)',
         }}
-        onFocus={(e) => e.target.style.borderColor = 'var(--accent)'}
-        onBlur={(e) => e.target.style.borderColor = 'var(--border)'}
       />
 
-      {/* Theme toggle - RED/BLUE */}
+      {/* Search toggle — mobile */}
       <button
-        onClick={toggleTheme}
-        title="Ganti tema"
-        className="btn-ghost rounded-lg px-3 py-2 text-sm font-bold flex items-center gap-2"
+        onClick={() => setShowMobileSearch((s) => !s)}
+        className="btn-ghost rounded-lg w-9 h-9 flex items-center justify-center md:hidden shrink-0"
+        data-tooltip={t.search}
       >
-        {theme === 'blue' ? (
-          <>
-            <span className="w-3 h-3 rounded-full" style={{ background: '#4a7fff', boxShadow: '0 0 10px #4a7fff' }} />
-            <span className="hidden md:inline">Blue</span>
-          </>
-        ) : (
-          <>
-            <span className="w-3 h-3 rounded-full" style={{ background: '#ff4a6b', boxShadow: '0 0 10px #ff4a6b' }} />
-            <span className="hidden md:inline">Red</span>
-          </>
-        )}
+        🔍
       </button>
 
-      <button
-        onClick={toggleGrid}
-        title="Grid"
-        className="btn-ghost rounded-lg px-3 py-2 text-sm"
+      {/* Group actions */}
+      <div
+        className="hidden sm:flex items-center gap-1 rounded-xl p-1"
+        style={{ background: 'var(--bg-panel-dark)' }}
       >
-        {grid ? '🔲' : '⬜'}
+        <button
+          onClick={onUndo}
+          disabled={!canUndo}
+          className={`rounded-lg w-9 h-9 flex items-center justify-center text-sm transition ${
+            canUndo ? 'hover:bg-[var(--bg-hover)]' : 'opacity-30 cursor-not-allowed'
+          }`}
+          data-tooltip={t.undo}
+          style={{ color: 'var(--text)' }}
+        >
+          ↩️
+        </button>
+        <button
+          onClick={onExport}
+          className="rounded-lg w-9 h-9 flex items-center justify-center text-sm transition hover:bg-[var(--bg-hover)]"
+          data-tooltip={t.export}
+          style={{ color: 'var(--text)' }}
+        >
+          📤
+        </button>
+        <button
+          onClick={handleImportClick}
+          className="rounded-lg w-9 h-9 flex items-center justify-center text-sm transition hover:bg-[var(--bg-hover)]"
+          data-tooltip={t.import}
+          style={{ color: 'var(--text)' }}
+        >
+          📥
+        </button>
+        <button
+          onClick={onOpenSettings}
+          className="rounded-lg w-9 h-9 flex items-center justify-center text-sm transition hover:bg-[var(--bg-hover)]"
+          data-tooltip={t.settings}
+          style={{ color: 'var(--text)' }}
+        >
+          ⚙️
+        </button>
+      </div>
+
+      {/* Settings — mobile */}
+      <button
+        onClick={onOpenSettings}
+        className="btn-ghost rounded-lg w-9 h-9 flex items-center justify-center sm:hidden shrink-0"
+        data-tooltip={t.settings}
+      >
+        ⚙️
       </button>
 
+      {/* Add button */}
       <button
-        onClick={onUndo}
-        disabled={!canUndo}
-        title="Undo (Ctrl+Z)"
-        className={`rounded-lg px-3 py-2 text-sm font-bold transition ${
-          canUndo ? 'btn-accent' : 'btn-ghost opacity-40 cursor-not-allowed'
-        }`}
+        onClick={onAdd}
+        className="btn-accent rounded-lg px-3 md:px-4 h-9 flex items-center justify-center text-sm font-semibold shrink-0"
+        data-tooltip={t.addNote}
       >
-        ↩️
-      </button>
-
-      <button
-        onClick={onExport}
-        title="Export"
-        className="btn-ghost rounded-lg px-3 py-2 text-sm"
-      >
-        📤
-      </button>
-
-      <button
-        onClick={handleImportClick}
-        title="Import"
-        className="btn-ghost rounded-lg px-3 py-2 text-sm"
-      >
-        📥
+        <span className="md:hidden">+</span>
+        <span className="hidden md:inline">+ {t.note}</span>
       </button>
 
       <input
@@ -133,13 +156,25 @@ export default function Toolbar({
         className="hidden"
       />
 
-      <button
-        onClick={onAdd}
-        title="Note baru (N)"
-        className="btn-accent rounded-lg px-4 py-2 text-sm"
-      >
-        + Note
-      </button>
+      {showMobileSearch && (
+        <div
+          className="absolute top-full left-0 right-0 p-3 border-b md:hidden slide-up"
+          style={{ background: 'var(--bg-panel)', borderColor: 'var(--border)' }}
+        >
+          <input
+            autoFocus
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder={t.searchPlaceholder}
+            className="w-full px-3 py-2 rounded-lg outline-none text-sm"
+            style={{
+              background: 'var(--bg-panel-dark)',
+              border: '1px solid var(--border)',
+              color: 'var(--text)',
+            }}
+          />
+        </div>
+      )}
     </header>
   );
 }
